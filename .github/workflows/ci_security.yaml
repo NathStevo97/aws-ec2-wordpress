@@ -1,0 +1,23 @@
+name: CI Security Checks
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Checkov - Prevent cloud misconfigurations and find vulnerabilities during build-time in infrastructure as code
+    - name: Run Checkov
+      run: |
+          docker run -t -v ${{ github.workspace }}:/tf --workdir /tf bridgecrew/checkov --directory /tf --skip-check CKV2_GHA_1 --quiet
+      continue-on-error: true
