@@ -1,5 +1,7 @@
 .PHONY: help
 
+TERRAFORM_DIR := terraform
+
 help:
 	@echo "Available commands:"
 	@echo "  make packer-init       - Initialize Packer with required plugins"
@@ -18,16 +20,16 @@ packer-build:
 	@packer build -var-file=packer/variables.pkrvars.hcl ./packer/ubuntu-wordpress.pkr.hcl
 
 tf-init:
-	@terraform init
+	@terraform -chdir=$(TERRAFORM_DIR) init  -upgrade
 
 tf-plan:
-	@terraform plan
+	@terraform -chdir=$(TERRAFORM_DIR) plan --var-file=terraform.tfvars
 
 tf-apply:
-	@terraform apply --var-file=terraform.tfvars --auto-approve
+	@terraform -chdir=$(TERRAFORM_DIR) apply --var-file=terraform.tfvars --auto-approve
 
 tf-destroy:
-	@terraform destroy --var-file=terraform.tfvars --auto-approve
+	@terraform destroy -chdir=$(TERRAFORM_DIR) --var-file=terraform.tfvars --auto-approve
 
 tf-nuke: tf-destroy tf-apply
 

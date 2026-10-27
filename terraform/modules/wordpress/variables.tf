@@ -39,3 +39,9 @@ variable "aws_ami_id" {
   type        = string
   description = "Custom AMI ID by Packer"
 }
+
+variable "public_key_path" {
+  type        = string
+  description = "Path to the public key for the AWS Key Pair"
+  default     = ""
+}
