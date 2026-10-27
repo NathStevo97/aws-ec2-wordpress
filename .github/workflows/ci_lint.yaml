@@ -107,6 +107,10 @@ jobs:
     - name: Show version
       run: terraform --version
 
+    # Initialize Terraform plugins
+    - name: Init Terraform
+      run: terraform -chdir="./terraform" init -upgrade
+
     # Run terraform validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
     - name: Run Terraform validate
       run: terraform -chdir="./terraform" validate
