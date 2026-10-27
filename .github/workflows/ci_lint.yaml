@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Packer fmt - Terraform Check
-    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-packer@ae6b3ed3bec089bbfb576ab7d714df7cbc4b88a4 # v2.0.0
       name: Setup Packer
       with:
         version: 1.7.8
@@ -39,7 +39,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Packer validate - Terraform Check
-    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-packer@ae6b3ed3bec089bbfb576ab7d714df7cbc4b88a4 # v2.0.0
       name: Setup Packer
       with:
         version: 1.7.8
