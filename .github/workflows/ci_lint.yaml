@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Packer fmt - Terraform Check
-    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-packer@ce93c3c08a6c2ff2275bf4b54ff0d9a75f6c9789 # v3.4.0
       name: Setup Packer
       with:
         version: 1.7.8
@@ -39,7 +39,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Packer validate - Terraform Check
-    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-packer@ce93c3c08a6c2ff2275bf4b54ff0d9a75f6c9789 # v3.4.0
       name: Setup Packer
       with:
         version: 1.7.8
@@ -61,16 +61,8 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Shellcheck - Terraform Check
-    - uses: ludeeus/action-shellcheck@v1.0.0
-      name: Setup Shellcheck
-
-    # Print Shellcheck version
-    - name: Show version
-      run: shellcheck --version
-
-    # Run shellcheck command in each directory recursively # use --force if you want to continue with workflow although errors are there
-    - name: Run Shellcheck
-      run: find . -type f -name "*.sh" -exec shellcheck {} \;
+    - uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # v2.0.0
+      name: Run Shellcheck
 
   tf-fmt:
     runs-on: ubuntu-latest
@@ -81,7 +73,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Terraform fmt - Terraform Check
-    - uses: hashicorp/setup-terraform@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
       name: Setup Terraform
       with:
         terraform_version: 1.7.8
@@ -103,7 +95,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     # Terraform validate - Terraform Check
-    - uses: hashicorp/setup-terraform@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+    - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
       name: Setup Terraform
       with:
         terraform_version: 1.7.8
