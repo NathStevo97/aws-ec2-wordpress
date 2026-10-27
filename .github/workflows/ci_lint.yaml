@@ -8,7 +8,115 @@ on:
 permissions: read-all
 
 jobs:
-  tflint-checks:
+  packer-fmt:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Packer fmt - Terraform Check
+    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+      name: Setup Packer
+      with:
+        version: 1.7.8
+
+    # Print Packer version
+    - name: Show version
+      run: packer --version
+
+    # Run packer fmt command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    - name: Run Packer fmt
+      run: packer fmt -check -recursive .
+
+  packer-validate:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Packer validate - Terraform Check
+    - uses: hashicorp/setup-packer@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+      name: Setup Packer
+      with:
+        version: 1.7.8
+
+    # Print Packer version
+    - name: Show version
+      run: packer --version
+
+    # Run packer validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    - name: Run Packer validate
+      run: packer validate -var-file=variables.json -recursive .
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Shellcheck - Terraform Check
+    - uses: ludeeus/action-shellcheck@v1.0.0
+      name: Setup Shellcheck
+
+    # Print Shellcheck version
+    - name: Show version
+      run: shellcheck --version
+
+    # Run shellcheck command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    - name: Run Shellcheck
+      run: find . -type f -name "*.sh" -exec shellcheck {} \;
+
+  tf-fmt:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Terraform fmt - Terraform Check
+    - uses: hashicorp/setup-terraform@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+      name: Setup Terraform
+      with:
+        terraform_version: 1.7.8
+
+    # Print Terraform version
+    - name: Show version
+      run: terraform --version
+
+    # Run terraform fmt command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    - name: Run Terraform fmt
+      run: terraform fmt -check -recursive .
+
+  tf-validate:
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checkout Repository
+    - name : Check out Git Repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+    # Terraform validate - Terraform Check
+    - uses: hashicorp/setup-terraform@f8a2e9f4d6f0a7b8e4c6e2f9b1c8e1f2a3b4c5d6 # v2.0.0
+      name: Setup Terraform
+      with:
+        terraform_version: 1.7.8
+
+    # Print Terraform version
+    - name: Show version
+      run: terraform --version
+
+    # Run terraform validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    - name: Run Terraform validate
+      run: terraform validate -recursive .
+
+  tflint:
     runs-on: ubuntu-latest
     steps:
 
