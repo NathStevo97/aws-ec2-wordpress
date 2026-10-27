@@ -48,7 +48,10 @@ jobs:
     - name: Show version
       run: packer --version
 
-    # Run packer validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
+    # Initialize Packer plugins
+    - name: Initialize Packer plugins
+      run: packer init ./packer/required_plugins.pkr.hcl
+
     - name: Run Packer validate
       run: packer validate ./packer/ubuntu-wordpress.pkr.hcl
 
@@ -106,7 +109,7 @@ jobs:
 
     # Run terraform validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
     - name: Run Terraform validate
-      run: terraform -chdir ./terraform validate
+      run: terraform -chdir="./terraform" validate
 
   tflint:
     runs-on: ubuntu-latest
