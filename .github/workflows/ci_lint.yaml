@@ -20,7 +20,7 @@ jobs:
     - uses: hashicorp/setup-packer@ce93c3c08a6c2ff2275bf4b54ff0d9a75f6c9789 # v3.4.0
       name: Setup Packer
       with:
-        version: 1.16.0
+        version: 1.16.2
 
     # Print Packer version
     - name: Show version
@@ -42,7 +42,7 @@ jobs:
     - uses: hashicorp/setup-packer@ce93c3c08a6c2ff2275bf4b54ff0d9a75f6c9789 # v3.4.0
       name: Setup Packer
       with:
-        version: 1.16.0
+        version: 1.16.2
 
     # Print Packer version
     - name: Show version
