@@ -50,7 +50,7 @@ jobs:
 
     # Run packer validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
     - name: Run Packer validate
-      run: packer validate -var-file=variables.json -recursive .
+      run: packer validate ./packer/ubuntu-wordpress.pkr.hcl
 
   shellcheck:
     runs-on: ubuntu-latest
@@ -106,7 +106,7 @@ jobs:
 
     # Run terraform validate command in each directory recursively # use --force if you want to continue with workflow although errors are there
     - name: Run Terraform validate
-      run: terraform validate -recursive .
+      run: terraform -chdir ./terraform validate
 
   tflint:
     runs-on: ubuntu-latest
